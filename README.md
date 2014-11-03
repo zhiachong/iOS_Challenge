@@ -2,7 +2,7 @@
 
 #### Requirements
 
-Calculate and display each Fibonacci number from 1 to max N on an iPhone with unsigned integers, and display each F(n) in a table view.  The UITableView scrolling MUST remain smooth.
+Calculate and display each Fibonacci number from 1 to max N on an iPhone with unsigned integers, and display each F(n) in a table view.  The UITableView scrolling __MUST__ remain smooth.
 
 The formula for calculating a Fibonacci number is: 
 
@@ -20,10 +20,17 @@ The user will need to type in the max N everytime the app is shown. You are free
 - Ability to abstract and introduce functions when necessary
 - Ability to demonstrate proficiency with iOS libraries 
 
+#### Programming Languages
+
+Choose one or the other:
+
+- Objective-C
+- Swift 
+
 ##### Supported formats
 
-iPhone 4
-iPhone 4S
-iPhone 5
-iPhone 5S
-iPhone 6/6 Plus
+- iPhone 4
+- iPhone 4S
+- iPhone 5
+- iPhone 5S
+- iPhone 6/6 Plus
