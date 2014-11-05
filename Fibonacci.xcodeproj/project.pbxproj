@@ -412,6 +412,7 @@
 				A3CC67891A08A9AC00470788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A3CC678A1A08A9AC00470788 /* Build configuration list for PBXNativeTarget "FibonacciTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +421,7 @@
 				A3CC678C1A08A9AC00470788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,6 +8,11 @@
 
 #import "ViewController.h"
 
+// Add two arrays of the same size (size)
+// Each array is a representation of a natural number
+// The returned array will have the size of (size + 1) elements
+
+
 @interface ViewController ()
 
 @end
@@ -19,7 +24,10 @@
     // Do any additional setup after loading the view, typically from a nib.
     // Initialize table data
     
-    [self redrawTable];
+    _fibNumArr = [[NSMutableArray alloc] init];
+    [_fibNumArr addObject:@"1"];
+    [_fibNumArr addObject:@"1"];
+    _maxN = [_textMaxN.text intValue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,7 +37,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.tableData count];
+    return _maxN;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -41,7 +49,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    cell.textLabel.text = [self.tableData objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self getFibNum: (int)indexPath.row];
+    cell.textLabel.numberOfLines = 0;
     return cell;
 }
 
@@ -61,30 +70,53 @@
     
     if(!isNumeric)
         return; //don't redraw table if the text is not a valid number
+
+    _maxN = [_textMaxN.text intValue];
     
-    //Warning if the max number exceeds the max of unsigned int
-    if([_textMaxN.text longLongValue] > 2147483647)
-        [[[UIAlertView alloc] initWithTitle:@"Warnning" message:@"Numbers larger than 2147483647 will not be shown." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-    
-    NSString *tempString;
-    unsigned int maxN = [_textMaxN.text intValue];
-    unsigned int f1 = 1; // seed value 1
-    unsigned int f2 = 0; // seed value 2
-    unsigned int fn; // used as a holder for each new value in the loop
-    self.tableData = [[NSMutableArray alloc] init];
-    
-    //loop while the number does not exceed the entered max N
-    while(maxN > f1 + f2)
-    {
-        fn = f1 + f2;
-        f1 = f2;
-        f2 = fn;
-        
-        tempString = [NSString stringWithFormat: @"%d", fn];
-        [self.tableData addObject:tempString];
-    }
-    //reload the table with regenerated fibonacci numbers
     [self.tableFibonacci reloadData];
+}
+
+- (NSString *) addTwoNumbers: (NSString *) arr1 :(NSString *) arr2 {
+    if(arr1.length < arr2.length)
+        arr1 = [@"0" stringByAppendingString:arr1];
+    
+    NSUInteger size = arr2.length;
+    NSString *arrTotal = [[NSString alloc] init];
+    
+    NSInteger remainder = 0;
+    for (NSInteger i = size - 1; i >= 0; i--) {
+        NSString *c1 = [arr1 substringWithRange:NSMakeRange(i, 1)];
+        NSString *c2 = [arr2 substringWithRange:NSMakeRange(i, 1)];
+        
+        NSInteger temp = [c1 integerValue] + [c2 integerValue] + remainder;
+        NSInteger r = temp % 10;
+        arrTotal = [[NSString stringWithFormat:@"%i", (int)r] stringByAppendingString: arrTotal];
+        remainder = temp / 10;
+    }
+    if(remainder != 0)
+        arrTotal = [[NSString stringWithFormat:@"%i", (int)remainder] stringByAppendingString: arrTotal];
+    
+    return arrTotal;
+}
+
+- (NSString *) getFibNum:(int) n {
+    if(n < _fibNumArr.count)
+        return [_fibNumArr objectAtIndex: n];
+    
+    NSString *fibNum1 = [_fibNumArr objectAtIndex:_fibNumArr.count - 2];
+    NSString *fibNum2 = [_fibNumArr objectAtIndex:_fibNumArr.count - 1];
+    NSString *fibReultNum;
+    
+    // Do the Iterative way
+    for (int i = (int)_fibNumArr.count-1; i < n ; i++) {
+        fibReultNum = [self addTwoNumbers: fibNum1 :fibNum2];
+        fibNum1 = fibNum2;
+        NSString *fibNum2Temp = fibReultNum;
+        fibNum2 = fibNum2Temp;
+        [_fibNumArr addObject:fibReultNum];
+    }
+    
+    return fibReultNum;
 }
 
 @end

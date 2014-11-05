@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableFibonacci;
 @property (nonatomic, retain) IBOutlet UITextField *textMaxN;
-@property (strong) NSMutableArray *tableData;
-
+@property (strong) NSMutableArray *fibNumArr;
+@property (nonatomic) int maxN;
 @end
 
