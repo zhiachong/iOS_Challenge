@@ -11,7 +11,8 @@
 
 @interface ViewController () {
 	NSArray *fibonacciNumbers;
-	NSInteger maxCount;
+	NSString *maxCount;
+	BOOL isFirstUpdate;
 }
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
@@ -23,6 +24,10 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	NSNotification* notification = [NSNotification notificationWithName:@"UpdateView" object:self];
+	[[NSNotificationCenter defaultCenter] postNotification:notification];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTableView) name:@"UpdateView" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,9 +35,25 @@
 	// Dispose of any resources that can be recreated.
 }
 
-- (void)calculateFibonacci {
-	fibonacciNumbers = [[MathFunctions shareInstance] getFibonacciSequence:maxCount];
+- (void)calculateFibonacciForIndex {
+	dispatch_queue_t backgroundQueue = dispatch_queue_create("fibonacciQueue", 0);
+	dispatch_async(backgroundQueue, ^{
+		JKBigInteger *count = [[JKBigInteger alloc] initWithString:maxCount];
+		fibonacciNumbers = [NSArray arrayWithArray:[[MathFunctions shareInstance] getFibonacciSequence:count]];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.tableView reloadData];
+			[self.tableView scrollRectToVisible:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) animated:YES];
+		});
+	});
+}
+
+- (void)updateTableView {
+	fibonacciNumbers = [NSArray arrayWithArray:[MathFunctions shareInstance].numbersArray];
 	[self.tableView reloadData];
+	if (isFirstUpdate) {
+		[self.tableView scrollRectToVisible:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) animated:YES];
+		isFirstUpdate = NO;
+	}
 }
 
 #pragma mark - UITableViewDataSource
@@ -47,18 +68,28 @@
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
-	
-	cell.textLabel.text = [NSString stringWithFormat:@"%@", [fibonacciNumbers objectAtIndex:indexPath.row]];
+	if (indexPath.row < [fibonacciNumbers count]) {
+		NSString *formattedString = [NSString stringWithFormat:@"f[%d]: %@", indexPath.row, [fibonacciNumbers objectAtIndex:indexPath.row]];
+		cell.textLabel.text =formattedString;
+		cell.textLabel.adjustsFontSizeToFitWidth = YES;
+		cell.textLabel.numberOfLines = 0;
+		[cell.textLabel sizeToFit];
+	}
 	
 	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 50;
 }
 
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
-	maxCount = [textField.text integerValue];
-	[self calculateFibonacci];
+	maxCount = textField.text;
+	isFirstUpdate = YES;
+	[self calculateFibonacciForIndex];
 	return YES;
 }
 

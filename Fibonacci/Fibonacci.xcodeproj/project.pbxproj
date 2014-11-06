@@ -15,6 +15,8 @@
 		E3C087E01A0825D800EA5C00 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C087DE1A0825D800EA5C00 /* LaunchScreen.xib */; };
 		E3C087EC1A0825D900EA5C00 /* FibonacciTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C087EB1A0825D900EA5C00 /* FibonacciTests.m */; };
 		E3C088021A08413000EA5C00 /* MathFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C088011A08413000EA5C00 /* MathFunctions.m */; };
+		E3E9233D1A0AA4F0006AD6F6 /* JKBigInteger.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E923371A0AA4F0006AD6F6 /* JKBigInteger.m */; };
+		E3E9233E1A0AA4F0006AD6F6 /* tommath.c in Sources */ = {isa = PBXBuildFile; fileRef = E3E923391A0AA4F0006AD6F6 /* tommath.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,12 @@
 		E3C087EB1A0825D900EA5C00 /* FibonacciTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FibonacciTests.m; sourceTree = "<group>"; };
 		E3C088001A08413000EA5C00 /* MathFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathFunctions.h; sourceTree = "<group>"; };
 		E3C088011A08413000EA5C00 /* MathFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathFunctions.m; sourceTree = "<group>"; };
+		E3E923361A0AA4F0006AD6F6 /* JKBigInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKBigInteger.h; sourceTree = "<group>"; };
+		E3E923371A0AA4F0006AD6F6 /* JKBigInteger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKBigInteger.m; sourceTree = "<group>"; };
+		E3E923391A0AA4F0006AD6F6 /* tommath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tommath.c; sourceTree = "<group>"; };
+		E3E9233A1A0AA4F0006AD6F6 /* tommath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tommath.h; sourceTree = "<group>"; };
+		E3E9233B1A0AA4F0006AD6F6 /* tommath_class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tommath_class.h; sourceTree = "<group>"; };
+		E3E9233C1A0AA4F0006AD6F6 /* tommath_superclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tommath_superclass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,7 @@
 		E3C087CE1A0825D800EA5C00 /* Fibonacci */ = {
 			isa = PBXGroup;
 			children = (
+				E3E923341A0AA4F0006AD6F6 /* External */,
 				E3C087D31A0825D800EA5C00 /* AppDelegate.h */,
 				E3C087D41A0825D800EA5C00 /* AppDelegate.m */,
 				E3C087D61A0825D800EA5C00 /* ViewController.h */,
@@ -122,6 +131,35 @@
 				E3C087EA1A0825D900EA5C00 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E3E923341A0AA4F0006AD6F6 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				E3E923351A0AA4F0006AD6F6 /* JKBigInteger */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		E3E923351A0AA4F0006AD6F6 /* JKBigInteger */ = {
+			isa = PBXGroup;
+			children = (
+				E3E923361A0AA4F0006AD6F6 /* JKBigInteger.h */,
+				E3E923371A0AA4F0006AD6F6 /* JKBigInteger.m */,
+				E3E923381A0AA4F0006AD6F6 /* LibTomMath */,
+			);
+			path = JKBigInteger;
+			sourceTree = "<group>";
+		};
+		E3E923381A0AA4F0006AD6F6 /* LibTomMath */ = {
+			isa = PBXGroup;
+			children = (
+				E3E923391A0AA4F0006AD6F6 /* tommath.c */,
+				E3E9233A1A0AA4F0006AD6F6 /* tommath.h */,
+				E3E9233B1A0AA4F0006AD6F6 /* tommath_class.h */,
+				E3E9233C1A0AA4F0006AD6F6 /* tommath_superclass.h */,
+			);
+			path = LibTomMath;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,7 +264,9 @@
 			files = (
 				E3C087D81A0825D800EA5C00 /* ViewController.m in Sources */,
 				E3C088021A08413000EA5C00 /* MathFunctions.m in Sources */,
+				E3E9233E1A0AA4F0006AD6F6 /* tommath.c in Sources */,
 				E3C087D51A0825D800EA5C00 /* AppDelegate.m in Sources */,
+				E3E9233D1A0AA4F0006AD6F6 /* JKBigInteger.m in Sources */,
 				E3C087D21A0825D800EA5C00 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +460,7 @@
 				E3C087F11A0825D900EA5C00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E3C087F21A0825D900EA5C00 /* Build configuration list for PBXNativeTarget "FibonacciTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +469,7 @@
 				E3C087F41A0825D900EA5C00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

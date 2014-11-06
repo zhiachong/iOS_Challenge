@@ -7,8 +7,16 @@
 //
 
 #import "MathFunctions.h"
+#import "JKBigInteger.h"
 
 static MathFunctions *shareInstance = nil;
+
+@interface MathFunctions () {
+	NSMutableArray *fibNumbers;
+	JKBigInteger *prevNumber;
+}
+
+@end
 
 @implementation MathFunctions
 
@@ -19,21 +27,44 @@ static MathFunctions *shareInstance = nil;
 	return shareInstance;
 }
 
-- (NSArray *)getFibonacciSequence:(NSUInteger)number {
-	NSMutableArray *fibonacciNumbers = [NSMutableArray array];
+- (id) init {
+	self = [super init];
+	if (self) {
+		fibNumbers = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
+- (NSArray *)getFibonacciSequence:(JKBigInteger*)number {
+	if ([number unsignedIntValue] < 1)
+		return nil;
 	
-	[fibonacciNumbers addObject: [NSNumber numberWithUnsignedInt: 0]];
-	[fibonacciNumbers addObject: [NSNumber numberWithUnsignedInt: 1]];
+	[fibNumbers removeAllObjects];
+	self.numbersArray = [NSArray arrayWithArray:fibNumbers];
 	
-	unsigned int prevTwo = 0, prevOne = 1, current;
 	
-	do {
-		current = prevOne + prevTwo;
-		[fibonacciNumbers addObject: [NSNumber numberWithUnsignedInt: current]];
-		prevTwo = prevOne, prevOne = current;
-	} while (prevOne <= number - prevTwo);
- 
-	return (NSArray *)fibonacciNumbers;
+	JKBigInteger *prevOne = [[JKBigInteger alloc] initWithUnsignedLong:1]; //last
+	JKBigInteger *prevTwo = [[JKBigInteger alloc] initWithUnsignedLong:0]; //beforeLast
+	JKBigInteger *current = [[JKBigInteger alloc] initWithUnsignedLong:0];
+	
+	[fibNumbers addObject: [prevOne stringValue]];
+	while ([number unsignedIntValue] >= 2) {
+		current = [prevOne add:prevTwo];
+		[fibNumbers addObject:[current stringValue]];
+		prevTwo = prevOne;
+		prevOne = current;
+		number = [number subtract:[[JKBigInteger alloc] initWithUnsignedLong:1]];
+		[self updateNumbersArray];
+	}
+	
+	return (NSArray *)fibNumbers;
+}
+
+- (void)updateNumbersArray {
+	if ([fibNumbers count] - [self.numbersArray count] > 100) {
+		self.numbersArray = [NSArray arrayWithArray:fibNumbers];
+		 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateView" object:nil userInfo:nil];
+	}
 }
 
 @end
