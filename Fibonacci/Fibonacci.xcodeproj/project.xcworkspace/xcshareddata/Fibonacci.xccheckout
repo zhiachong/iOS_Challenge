@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2A397EB5-8725-4C4C-904E-B5FCEF82B331</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Fibonacci</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0360EE9201BBB0F0F8E218ABB2622741C591C044</key>
+		<string>https://github.com/ToxicSun/iOS_Challenge.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Fibonacci/Fibonacci.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0360EE9201BBB0F0F8E218ABB2622741C591C044</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ToxicSun/iOS_Challenge.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0360EE9201BBB0F0F8E218ABB2622741C591C044</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0360EE9201BBB0F0F8E218ABB2622741C591C044</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOS_Challenge</string>
+		</dict>
+	</array>
+</dict>
+</plist>
