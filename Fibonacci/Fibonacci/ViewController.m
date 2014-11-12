@@ -69,7 +69,7 @@
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	if (indexPath.row < [fibonacciNumbers count]) {
-		NSString *formattedString = [NSString stringWithFormat:@"f[%d]: %@", indexPath.row, [fibonacciNumbers objectAtIndex:indexPath.row]];
+		NSString *formattedString = [NSString stringWithFormat:@"f[%d]: %@", (int)indexPath.row, [fibonacciNumbers objectAtIndex:indexPath.row]];
 		cell.textLabel.text =formattedString;
 		cell.textLabel.adjustsFontSizeToFitWidth = YES;
 		cell.textLabel.numberOfLines = 0;
